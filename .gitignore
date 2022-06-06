@@ -13,3 +13,8 @@ target/
 
 # OS
 .DS_Store
+
+# Node
+
+node_modules/
+cdk.out/
