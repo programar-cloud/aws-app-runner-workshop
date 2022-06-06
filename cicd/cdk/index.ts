@@ -22,7 +22,7 @@ class PetclinicVPCStack extends cdk.Stack {
     this.appSecurityGroup = new ec2.SecurityGroup(this, 'SG-APP', {
       vpc: this.vpc
     });
-    this.dbSecurityGroup.addIngressRule(this.appSecurityGroup, ec2.Port.tcp(5432), 'Postgress default port for the app layer');
+    this.dbSecurityGroup.addIngressRule(this.appSecurityGroup, ec2.Port.tcp(3306), 'Mysql default port for the app layer');
     this.appSecurityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(8080), 'App port from anywhere');
 
     new cdk.CfnOutput(this, 'appSecurityGroup', {
@@ -34,7 +34,7 @@ class PetclinicVPCStack extends cdk.Stack {
 }
 
 class PetclinicDBStack extends cdk.Stack {
-  readonly postgres: rds.DatabaseInstance;
+  readonly mysql: rds.DatabaseInstance;
   
   constructor(scope: cdk.App, id: string, 
               vpc: ec2.Vpc, privateSubnets: ec2.SelectedSubnets, 
@@ -42,11 +42,11 @@ class PetclinicDBStack extends cdk.Stack {
               props?: cdk.StackProps) {
     super(scope, id, props);
 
-    this.postgres = new rds.DatabaseInstance(this, 'DB-MAIN', {
+    this.mysql = new rds.DatabaseInstance(this, 'DB-MAIN', {
       databaseName : 'petclinic',
       instanceIdentifier : 'PETCLINIC-DB',
-      engine : rds.DatabaseInstanceEngine.postgres({
-        version: rds.PostgresEngineVersion.VER_13_4
+      engine : rds.DatabaseInstanceEngine.mysql({
+        version: rds.MysqlEngineVersion.VER_5_7_34
       }),       
       vpc : vpc,
       vpcSubnets : privateSubnets,
@@ -59,7 +59,7 @@ class PetclinicDBStack extends cdk.Stack {
       }
     });
     new cdk.CfnOutput(this, 'dbURL', {
-      value: this.postgres.dbInstanceEndpointAddress,
+      value: this.mysql.dbInstanceEndpointAddress,
       description: 'Database instance endpoint.',
       exportName: 'dbEndpoint'
     });    
