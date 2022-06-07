@@ -511,9 +511,9 @@
                 <db.script>mysql</db.script>
                 <jpa.database>MYSQL</jpa.database>
                 <jdbc.driverClassName>com.mysql.cj.jdbc.Driver</jdbc.driverClassName>
-                <jdbc.url>jdbc:mysql://:3306/petclinic?useUnicode=true</jdbc.url>
+                <jdbc.url>jdbc:mysql://localhost:3306/petclinic?useUnicode=true</jdbc.url>
                 <jdbc.username>petclinic</jdbc.username>
-                <jdbc.password>p3tcl1n1c</jdbc.password>
+                <jdbc.password>petclinic</jdbc.password>
             </properties>
             <dependencies>
                 <dependency>
