@@ -38,13 +38,13 @@ npm --version
 ```bash
 git clone https://github.com/ciberado/aws-app-runner-workshop
 cd aws-app-runner-workshop/cicd/cdk
+npm install
 ```
 
 * Compile and check the stack
 
 ```bash
 npm run build
-npx cdk synth
 ```
 
 * Init the cdk assets
