@@ -33,6 +33,13 @@ node --version
 npm --version
 ```
 
+* Clone the repo and navigate to this folder
+
+```bash
+git clone https://github.com/ciberado/aws-app-runner-workshop
+cd aws-app-runner-workshop/cicd/cdk
+```
+
 * Compile and check the stack
 
 ```bash
